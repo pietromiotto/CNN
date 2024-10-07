@@ -480,7 +480,7 @@ My model is defined as follows:
                 self.conv1 = nn.Conv2d(3, 32, 3, stride=1, padding=1)
                 self.conv2 = nn.Conv2d(32, 32, 3, stride=1, padding=1)
     
-    Thus with a VGG3 we get:
+        Thus with a VGG3 we get:
     
                 self.conv1 = nn.Conv2d(3, 32, 3, stride=1, padding=1)
                 self.conv2 = nn.Conv2d(32, 32, 3, stride=1, padding=1)
