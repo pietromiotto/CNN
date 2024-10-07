@@ -489,18 +489,18 @@ My model is defined as follows:
                 self.conv5 = nn.Conv2d(64, 128, 3, stride=1, padding=1)
                 self.conv6 = nn.Conv2d(128, 128, 3, stride=1, padding=1)
     
-    Another difference with the old model is that `stride=1`, where
-    the stride is the "step size" of the filter, i.e. "shift
-    amount" between each step of the filter when it slides trough
-    the image. In other words, the "stride" is the number of
-    pixels the filter moves at each step. A larger stride value
-    means that the filter skips more pixels when moving, resulting
-    in a smaller output size and, since VGG is a deep convolutional
-    network, potentially less computational cost. Consequently, the
-    fully connected layers are reduced: VGG3 uses only two fully
-    connected layers, the first takes as input a $128x4x4$ tensor
-    and returns an output of $128$. The second reduces the input to
-    $10$ predictions.
+        Another difference with the old model is that `stride=1`, where
+        the stride is the "step size" of the filter, i.e. "shift
+        amount" between each step of the filter when it slides trough
+        the image. In other words, the "stride" is the number of
+        pixels the filter moves at each step. A larger stride value
+        means that the filter skips more pixels when moving, resulting
+        in a smaller output size and, since VGG is a deep convolutional
+        network, potentially less computational cost. Consequently, the
+        fully connected layers are reduced: VGG3 uses only two fully
+        connected layers, the first takes as input a $128x4x4$ tensor
+        and returns an output of $128$. The second reduces the input to
+        $10$ predictions.
     
     Increase Batch Size:
     
