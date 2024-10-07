@@ -1,10 +1,7 @@
----
-author:
-- "Student: NAME SURNAME; Student's email: EMAIL@usi.ch"
-title: Assignment 2
----
+#Conovlutional Neural Network to calssify CIFAR10 images
+Here I built, trained and tested two different models (a basic one and an upgraded one - trained on a modified dataset-) to be able to obtain an accuracy of 83% over the classification. Below you find a detailed report explaining the code and the procedures. The code is in a notebook, for enchanched clarity and ease of use. 
 
-# The Problem {#the-problem .unnumbered}
+## The Problem 
 
 The CIFAR-10 dataset is a widely used collection of images in the field
 of com- puter vision. It consists of 60000 (50000 for the training and
@@ -16,9 +13,9 @@ developing and evaluating machine learning al- gorithms for image
 recognition. The task of this assignment is to classify the images Note:
 in the python template we set a seed. Don't change it.
 
-# Questions {#questions .unnumbered}
+## Questions 
 
-## Data (20 pts)
+### Data 
 
 1.  (5 pts) Load the data (You can do it directly in PyTorch) and take
     some time to inspect the dataset. Observe at least one image per
@@ -56,7 +53,7 @@ in the python template we set a seed. Don't change it.
     validation set. Use 80% of data for the training set and 20% of the
     data for the validation set.
 
-## Model (10 pts)
+### Model (10 pts)
 
 Starting from the code provided during Lecture 6, define a ConvNet. You
 can only use:
@@ -73,7 +70,7 @@ For each convolutional layer you can choose padding and stride, however,
 we recommend choosing padding = 0 and stride = 1. The other choices are
 up to you. You can also take some inspiration from famous ConvNets.
 
-## Training (60 pts)
+### Training (60 pts)
 
 1.  (15 pts) Implement the training pipeline. Make sure to code the
     following:
@@ -119,9 +116,9 @@ up to you. You can also take some inspiration from famous ConvNets.
 6.  (2 pts) Save the parameters of the trained model as
     NAME_SURNAME_2.pt
 
-# Report {#report .unnumbered}
+## Report 
 
-## Data
+### Data
 
 1.  To load the data I create an istance of the `tochvision.Dataset`
     class for CIFAR10. For the trainset object I set `train=True`, for
@@ -152,7 +149,7 @@ up to you. You can also take some inspiration from famous ConvNets.
     cat, dog, airplane\".
 
     ![Plot showing one image for class of CIFAR10
-    dataset](images/images/imgplot.png){#fig:imgplot width="75%"}
+    dataset](images/imgplot.png)
 
     The function `plot_histogram` takes as arguments `classes`, the
     string label of each class, the trainset and the testset. In the
@@ -178,11 +175,10 @@ up to you. You can also take some inspiration from famous ConvNets.
     $1000$ for each class.
 
     ![Histogram of the distribution of images into classes of the
-    training dataset](images/images/trainingHG.png){#fig:trainHG
-    width="75%"}
+    training dataset](images/trainingHG.png)
 
     ![Histogram of the distribution of images into classes of the test
-    dataset](images/images/testHG.png){#fig:testHG width="75%"}
+    dataset](images/testHG.png)
 
 2.  To arrive to a suitable format for a Deep Learning task, I need to
     transform each element of the dataset into a tensor.
@@ -261,7 +257,7 @@ up to you. You can also take some inspiration from famous ConvNets.
     greater than 0 will create multiple worker processes to parallelize
     data loading
 
-## Model
+### Model
 
 My model is defined as follows:
 
@@ -352,7 +348,7 @@ My model is defined as follows:
     where each value corresponds to a specific channel in a specific
     spatial location. This makes it suitable for fully connected layers.
 
-## Training
+### Training
 
 1.  **Training Pipeline \[lines 236-317\]:** the training pipeline is
     similar to the one i described in the previous homework (where I
@@ -457,7 +453,7 @@ My model is defined as follows:
     take any explicit measure to reduce overfitting.
 
     ![Plot showing the loss evolution between training set and evauation
-    set](images/images/Unknown-4.png){#fig:lossplot width="75%"}
+    set](images/Unknown-4.png)
 
 5.  I improve my model with the following:
 
@@ -527,8 +523,7 @@ My model is defined as follows:
 
         ![Different transformation applied to perform data augmentation.
         Examples taken from [pytorch
-        documentation](https://pytorch.org/vision/main/auto_examples/transforms/plot_transforms_illustrations.html#sphx-glr-auto-examples-transforms-plot-transforms-illustrations-py)](images/images/transformations.png){#fig:transf
-        width="75%"}
+        documentation](https://pytorch.org/vision/main/auto_examples/transforms/plot_transforms_illustrations.html#sphx-glr-auto-examples-transforms-plot-transforms-illustrations-py)](images/images/transformations.png)
 
         -   `RandomHorizontalFlip()`: This transformation randomly flips
             the input image horizontally with a 50% probability. Suppose
