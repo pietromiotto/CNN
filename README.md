@@ -591,7 +591,7 @@ My model is defined as follows:
     *Please note that the label \"step\" here refers to epochs.*
     ](images/epoch.png)
     
-    7.  The Model parameters are saved in this line of code:
+    The Model parameters are saved in this line of code:
 
                 PATH = '/content/model2.ph'
                 torch.save(model2.state_dict(), PATH)
