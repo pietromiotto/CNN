@@ -477,17 +477,17 @@ My model is defined as follows:
         convolutional layers with the same output size. To clarify, the
         convolutional layers for VGG1 are defined as follows:
 
-            `self.conv1 = nn.Conv2d(3, 32, 3, stride=1, padding=1)
-            self.conv2 = nn.Conv2d(32, 32, 3, stride=1, padding=1)`
+            self.conv1 = nn.Conv2d(3, 32, 3, stride=1, padding=1)
+            self.conv2 = nn.Conv2d(32, 32, 3, stride=1, padding=1)
 
-        Thus with a VGG3 we get:
+       Thus with a VGG3 we get:
 
-           ` self.conv1 = nn.Conv2d(3, 32, 3, stride=1, padding=1)
+            self.conv1 = nn.Conv2d(3, 32, 3, stride=1, padding=1)
             self.conv2 = nn.Conv2d(32, 32, 3, stride=1, padding=1)
             self.conv3 = nn.Conv2d(32, 64, 3, stride=1, padding=1)
             self.conv4 = nn.Conv2d(64, 64, 3, stride=1, padding=1)
             self.conv5 = nn.Conv2d(64, 128, 3, stride=1, padding=1)
-            self.conv6 = nn.Conv2d(128, 128, 3, stride=1, padding=1)`
+            self.conv6 = nn.Conv2d(128, 128, 3, stride=1, padding=1)
 
         Another difference with the old model is that `stride=1`, where
         the stride is the "step size" of the filter, i.e. "shift
@@ -504,14 +504,14 @@ My model is defined as follows:
 
     Increase Batch Size:
 
-    -    I increased the number of batches since with $10$ batches,
+    - I increased the number of batches since with $10$ batches,
         on one side the model converges faster, but on the other its
         converges to a level of accuracy which lays around $75\%$, and
         doesn't actually get better. So I choose $32$ epochs, which
         slowed the convergence, but led to optimal results.
 
     Data Augmentation:
-    -     I also performed data augmentation on the training set (not
+    -  I also performed data augmentation on the training set (not
         on the test set of course). Data Augmentation is performed by
         appending to `transforms.Compose()` some image transformations
         that increase the variety (and variance) of data. With more
@@ -545,7 +545,7 @@ My model is defined as follows:
 
     LeakyRelu:
 
-  -     I used `nn.LeakyReLU(negative_slope=0.1)` which is basically a
+  -  I used `nn.LeakyReLU(negative_slope=0.1)` which is basically a
         RELU activation function but with a negative slope, i.e. the
         negative inputs are not directly set to $0$, but they follow a
         sligthly negative slope. Basically, Leaky ReLU allows a small,
@@ -556,7 +556,7 @@ My model is defined as follows:
 
     Adding Dropout:
 
-    -     I added dropout after each pooling layer (which in VGG is
+    -  I added dropout after each pooling layer (which in VGG is
         performed every two convolutional layers). Dropout basically
         deactivate neurons randomically, drastically reducing
         overfitting. I set `Dropout=0.5`, which means that half of the
@@ -568,7 +568,7 @@ My model is defined as follows:
 
     Adding BatchNormalization:
 
-    -     I added Batch Normalization to each Convolutional Layer.Batch
+    - I added Batch Normalization to each Convolutional Layer.Batch
         Normalization basically normalizes the inputs of each layer,
         speeding up the convergence. Since I increased the batch size
         (and so the time the model takes to converge), introducing batch
@@ -577,7 +577,7 @@ My model is defined as follows:
         normalization it took only $50$
 
     Increase Epochs:
-    -     I tried different batch sizes with different epochs. With
+    - I tried different batch sizes with different epochs. With
         this learning rate I noticed that the higher the batch size, the
         slower the convergence and, up to some point, the optimal the
         results. I tried a wide variety of epochs, in increasing order.
