@@ -457,141 +457,141 @@ My model is defined as follows:
 
 5.  I improve my model with the following:
 
-Modification of the Model:
-
--I modified my model taking inspiration from [this
-    article](https://machinelearningmastery.com/how-to-develop-a-cnn-from-scratch-for-cifar-10-photo-classification/).
-    The main difference with the old model was that I stopped
-    increasing the number of filters to $128$. Also, the model is
-    deeper, since it uses $6$ Convolutional Layer instead of $4$.
-    This model is a so called *VGG Architecture*. VGG stands for
-    Visual Geometry Group; it is a standard deep Convolutional
-    Neural Network architecture with multiple layers. The "deep"
-    refers to the number of layers, the most common implementations
-    are VGG-16 and VGG-19, consisting of 16 and 19 convolutional
-    layers. The VGG architecture is the basis of ground-breaking
-    object recognition models. The VGGNet it is one of the most
-    popular image recognition architectures. In this simple
-    classification task the article suggested to implement a *VGG3*.
-    The core of this architecture is to have two contiguous
-    convolutional layers with the same output size. To clarify, the
-    convolutional layers for VGG1 are defined as follows:
-
-            self.conv1 = nn.Conv2d(3, 32, 3, stride=1, padding=1)
-            self.conv2 = nn.Conv2d(32, 32, 3, stride=1, padding=1)
-
-Thus with a VGG3 we get:
-
-            self.conv1 = nn.Conv2d(3, 32, 3, stride=1, padding=1)
-            self.conv2 = nn.Conv2d(32, 32, 3, stride=1, padding=1)
-            self.conv3 = nn.Conv2d(32, 64, 3, stride=1, padding=1)
-            self.conv4 = nn.Conv2d(64, 64, 3, stride=1, padding=1)
-            self.conv5 = nn.Conv2d(64, 128, 3, stride=1, padding=1)
-            self.conv6 = nn.Conv2d(128, 128, 3, stride=1, padding=1)
-
-Another difference with the old model is that `stride=1`, where
-the stride is the "step size" of the filter, i.e. "shift
-amount" between each step of the filter when it slides trough
-the image. In other words, the "stride" is the number of
-pixels the filter moves at each step. A larger stride value
-means that the filter skips more pixels when moving, resulting
-in a smaller output size and, since VGG is a deep convolutional
-network, potentially less computational cost. Consequently, the
-fully connected layers are reduced: VGG3 uses only two fully
-connected layers, the first takes as input a $128x4x4$ tensor
-and returns an output of $128$. The second reduces the input to
-$10$ predictions.
-
-Increase Batch Size:
-
-- I increased the number of batches since with $10$ batches,
-on one side the model converges faster, but on the other its
-converges to a level of accuracy which lays around $75\%$, and
-doesn't actually get better. So I choose $32$ epochs, which
-slowed the convergence, but led to optimal results.
-
-Data Augmentation:
--  I also performed data augmentation on the training set (not
-on the test set of course). Data Augmentation is performed by
-appending to `transforms.Compose()` some image transformations
-that increase the variety (and variance) of data. With more
-noisy and variegated data the model should generalize better. I
-chained together the following transformations (please look at
-Figure [5](#fig:transf){reference-type="ref"
-reference="fig:transf"} for a better understanding):
-
-![Different transformation applied to perform data augmentation.
-Examples taken from [pytorch
-documentation](https://pytorch.org/vision/main/auto_examples/transforms/plot_transforms_illustrations.html#sphx-glr-auto-examples-transforms-plot-transforms-illustrations-py)](images/transformations.png)
-
--   `RandomHorizontalFlip()`: This transformation randomly flips
-    the input image horizontally with a 50% probability. Suppose
-    most of the cat images show the animale facing left. By
-    applying this transformation, the dataset would consist of
-    more images of cat facing right.
-
--   `RandomRotation(10)`: This transformation randomly rotates
-    the input image using a degree in the range $[-10; 10]$.
-
--   `RandomAffine(0, shear=10, scale=(0.1, 1.2))`: to understand
-    this transformation I suggest you to look at
-    [5](#fig:transf){reference-type="ref"
-    reference="fig:transf"}. It is pretty complicated to
-    explain.
-
--   `ColorJitter(brightness=0.2,contrast=0.2, saturation=0.2)`
-    This transformation randomically increases/decreases
-    brightness, contrast and saturation of the images.
-
-LeakyRelu:
-
--  I used `nn.LeakyReLU(negative_slope=0.1)` which is basically a
-RELU activation function but with a negative slope, i.e. the
-negative inputs are not directly set to $0$, but they follow a
-sligthly negative slope. Basically, Leaky ReLU allows a small,
-non-zero gradient for negative inputs. I decided to use this
-activation function because, since even neurons with negative
-inputs contribute to the learning process, I wanted to not
-arbitrarily deactivate all neuron that returns values $<= 0$.
-
-Adding Dropout:
-
--  I added dropout after each pooling layer (which in VGG is
-performed every two convolutional layers). Dropout basically
-deactivate neurons randomically, drastically reducing
-overfitting. I set `Dropout=0.5`, which means that half of the
-neurons are deactivated at each step. Deactivating neurons
-prevents the network from relying too much on specific neurons
-and forces it to learn more robust and generalized features.
-This, with data augmentation, was sufficient to reduce
-overfitting of the model (I didn't need to use weight decay).
-
-Adding BatchNormalization:
-
-- I added Batch Normalization to each Convolutional Layer.Batch
-Normalization basically normalizes the inputs of each layer,
-speeding up the convergence. Since I increased the batch size
-(and so the time the model takes to converge), introducing batch
-normalization astonishingly sped up the process: firstly it took
-me more than $100$ epochs to reach $81\%$ accuracy, with batch
-normalization it took only $50$
-
-Increase Epochs:
-- I tried different batch sizes with different epochs. With
-this learning rate I noticed that the higher the batch size, the
-slower the convergence and, up to some point, the optimal the
-results. I tried a wide variety of epochs, in increasing order.
-In Figure [6](#fig:epoch){reference-type="ref"
-reference="fig:epoch"} is it possible to see how a certain
-number of epochs led to a certain amount of accuracy (in this
-case the image refers to using `batch_size=32`).
-
-![Evolution of evaluation and trainig loss, as well as evolution
-of accuracy related to increase of epochs with batch size 32.
-*Please note that the label \"step\" here refers to epochs.*
-](images/epoch.png){#fig:epoch width="75%"}
-
-7.  The Model parameters are saved in this line of code:
+    Modification of the Model:
+    
+    - I modified my model taking inspiration from [this
+        article](https://machinelearningmastery.com/how-to-develop-a-cnn-from-scratch-for-cifar-10-photo-classification/).
+        The main difference with the old model was that I stopped
+        increasing the number of filters to $128$. Also, the model is
+        deeper, since it uses $6$ Convolutional Layer instead of $4$.
+        This model is a so called *VGG Architecture*. VGG stands for
+        Visual Geometry Group; it is a standard deep Convolutional
+        Neural Network architecture with multiple layers. The "deep"
+        refers to the number of layers, the most common implementations
+        are VGG-16 and VGG-19, consisting of 16 and 19 convolutional
+        layers. The VGG architecture is the basis of ground-breaking
+        object recognition models. The VGGNet it is one of the most
+        popular image recognition architectures. In this simple
+        classification task the article suggested to implement a *VGG3*.
+        The core of this architecture is to have two contiguous
+        convolutional layers with the same output size. To clarify, the
+        convolutional layers for VGG1 are defined as follows:
+    
+                self.conv1 = nn.Conv2d(3, 32, 3, stride=1, padding=1)
+                self.conv2 = nn.Conv2d(32, 32, 3, stride=1, padding=1)
+    
+    Thus with a VGG3 we get:
+    
+                self.conv1 = nn.Conv2d(3, 32, 3, stride=1, padding=1)
+                self.conv2 = nn.Conv2d(32, 32, 3, stride=1, padding=1)
+                self.conv3 = nn.Conv2d(32, 64, 3, stride=1, padding=1)
+                self.conv4 = nn.Conv2d(64, 64, 3, stride=1, padding=1)
+                self.conv5 = nn.Conv2d(64, 128, 3, stride=1, padding=1)
+                self.conv6 = nn.Conv2d(128, 128, 3, stride=1, padding=1)
+    
+    Another difference with the old model is that `stride=1`, where
+    the stride is the "step size" of the filter, i.e. "shift
+    amount" between each step of the filter when it slides trough
+    the image. In other words, the "stride" is the number of
+    pixels the filter moves at each step. A larger stride value
+    means that the filter skips more pixels when moving, resulting
+    in a smaller output size and, since VGG is a deep convolutional
+    network, potentially less computational cost. Consequently, the
+    fully connected layers are reduced: VGG3 uses only two fully
+    connected layers, the first takes as input a $128x4x4$ tensor
+    and returns an output of $128$. The second reduces the input to
+    $10$ predictions.
+    
+    Increase Batch Size:
+    
+    - I increased the number of batches since with $10$ batches,
+    on one side the model converges faster, but on the other its
+    converges to a level of accuracy which lays around $75\%$, and
+    doesn't actually get better. So I choose $32$ epochs, which
+    slowed the convergence, but led to optimal results.
+    
+    Data Augmentation:
+    -  I also performed data augmentation on the training set (not
+    on the test set of course). Data Augmentation is performed by
+    appending to `transforms.Compose()` some image transformations
+    that increase the variety (and variance) of data. With more
+    noisy and variegated data the model should generalize better. I
+    chained together the following transformations (please look at
+    Figure [5](#fig:transf){reference-type="ref"
+    reference="fig:transf"} for a better understanding):
+    
+    ![Different transformation applied to perform data augmentation.
+    Examples taken from [pytorch
+    documentation](https://pytorch.org/vision/main/auto_examples/transforms/plot_transforms_illustrations.html#sphx-glr-auto-examples-transforms-plot-transforms-illustrations-py)](images/transformations.png)
+    
+    -   `RandomHorizontalFlip()`: This transformation randomly flips
+        the input image horizontally with a 50% probability. Suppose
+        most of the cat images show the animale facing left. By
+        applying this transformation, the dataset would consist of
+        more images of cat facing right.
+    
+    -   `RandomRotation(10)`: This transformation randomly rotates
+        the input image using a degree in the range $[-10; 10]$.
+    
+    -   `RandomAffine(0, shear=10, scale=(0.1, 1.2))`: to understand
+        this transformation I suggest you to look at
+        [5](#fig:transf){reference-type="ref"
+        reference="fig:transf"}. It is pretty complicated to
+        explain.
+    
+    -   `ColorJitter(brightness=0.2,contrast=0.2, saturation=0.2)`
+        This transformation randomically increases/decreases
+        brightness, contrast and saturation of the images.
+    
+    LeakyRelu:
+    
+    -  I used `nn.LeakyReLU(negative_slope=0.1)` which is basically a
+    RELU activation function but with a negative slope, i.e. the
+    negative inputs are not directly set to $0$, but they follow a
+    sligthly negative slope. Basically, Leaky ReLU allows a small,
+    non-zero gradient for negative inputs. I decided to use this
+    activation function because, since even neurons with negative
+    inputs contribute to the learning process, I wanted to not
+    arbitrarily deactivate all neuron that returns values $<= 0$.
+    
+    Adding Dropout:
+    
+    -  I added dropout after each pooling layer (which in VGG is
+    performed every two convolutional layers). Dropout basically
+    deactivate neurons randomically, drastically reducing
+    overfitting. I set `Dropout=0.5`, which means that half of the
+    neurons are deactivated at each step. Deactivating neurons
+    prevents the network from relying too much on specific neurons
+    and forces it to learn more robust and generalized features.
+    This, with data augmentation, was sufficient to reduce
+    overfitting of the model (I didn't need to use weight decay).
+    
+    Adding BatchNormalization:
+    
+    - I added Batch Normalization to each Convolutional Layer.Batch
+    Normalization basically normalizes the inputs of each layer,
+    speeding up the convergence. Since I increased the batch size
+    (and so the time the model takes to converge), introducing batch
+    normalization astonishingly sped up the process: firstly it took
+    me more than $100$ epochs to reach $81\%$ accuracy, with batch
+    normalization it took only $50$
+    
+    Increase Epochs:
+    - I tried different batch sizes with different epochs. With
+    this learning rate I noticed that the higher the batch size, the
+    slower the convergence and, up to some point, the optimal the
+    results. I tried a wide variety of epochs, in increasing order.
+    In Figure [6](#fig:epoch){reference-type="ref"
+    reference="fig:epoch"} is it possible to see how a certain
+    number of epochs led to a certain amount of accuracy (in this
+    case the image refers to using `batch_size=32`).
+    
+    ![Evolution of evaluation and trainig loss, as well as evolution
+    of accuracy related to increase of epochs with batch size 32.
+    *Please note that the label \"step\" here refers to epochs.*
+    ](images/epoch.png)
+    
+    7.  The Model parameters are saved in this line of code:
 
         PATH = '/content/MIOTTO_PIETRO_2.ph'
         torch.save(model2.state_dict(), PATH)
