@@ -1,5 +1,5 @@
 # Conovlutional Neural Network to calssify CIFAR10 images
-Here I built, trained and tested two different models (a basic one and an upgraded one - trained on a modified dataset-) to be able to obtain an accuracy of 83% over the classification. Below you find a detailed report explaining the code and the procedures. The code is in the `CNN.ipynb` notebook, for enchanched clarity and ease of use. 
+Here I built, trained and tested two different models (a basic one and an upgraded one - trained on a modified dataset-) to be able to obtain an accuracy of 83% over the classification. Below you find a detailed report explaining the code and the procedures. The code is in the `CNN.ipynb` notebook, for enchanched clarity and ease of use. The project resolves around solving different questions posed in an assignment (attached below before the report)
 
 ## The Problem 
 
