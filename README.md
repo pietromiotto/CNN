@@ -441,7 +441,7 @@ My model is defined as follows:
 3.  I save the model parameters in a ph file every $2000$ batches. The
     code is the following:
 
-                PATH = '/content/MIOTTO_PIETRO_1.ph'
+                PATH = '/content/model1.ph'
                 torch.save(model.state_dict(), PATH)
 
 4.  As we can see in Figure [4](#fig:lossplot){reference-type="ref"
@@ -593,5 +593,5 @@ My model is defined as follows:
     
     7.  The Model parameters are saved in this line of code:
 
-        PATH = '/content/MIOTTO_PIETRO_2.ph'
-        torch.save(model2.state_dict(), PATH)
+                PATH = '/content/model2.ph'
+                torch.save(model2.state_dict(), PATH)
