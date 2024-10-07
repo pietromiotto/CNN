@@ -151,12 +151,8 @@ up to you. You can also take some inspiration from famous ConvNets.
     have 10 classes: \"frog, truck, deer, automobile, bird, horse, ship,
     cat, dog, airplane\".
 
-    <figure id="fig:imgplot">
-    <span class="image placeholder" data-original-image-src="imgplot.png"
-    data-original-image-title="" width="75%"></span>
-    <figcaption>Plot showing one image for class of CIFAR10
-    dataset</figcaption>
-    </figure>
+    ![Plot showing one image for class of CIFAR10
+    dataset](images/images/imgplot.png){#fig:imgplot width="75%"}
 
     The function `plot_histogram` takes as arguments `classes`, the
     string label of each class, the trainset and the testset. In the
@@ -181,19 +177,12 @@ up to you. You can also take some inspiration from famous ConvNets.
     reference="fig:testHG"} in the testset we have $10.000$ images,
     $1000$ for each class.
 
-    <figure id="fig:trainHG">
-    <span class="image placeholder" data-original-image-src="trainingHG.png"
-    data-original-image-title="" width="75%"></span>
-    <figcaption>Histogram of the distribution of images into classes of the
-    training dataset</figcaption>
-    </figure>
+    ![Histogram of the distribution of images into classes of the
+    training dataset](images/images/trainingHG.png){#fig:trainHG
+    width="75%"}
 
-    <figure id="fig:testHG">
-    <span class="image placeholder" data-original-image-src="testHG.png"
-    data-original-image-title="" width="75%"></span>
-    <figcaption>Histogram of the distribution of images into classes of the
-    test dataset</figcaption>
-    </figure>
+    ![Histogram of the distribution of images into classes of the test
+    dataset](images/images/testHG.png){#fig:testHG width="75%"}
 
 2.  To arrive to a suitable format for a Deep Learning task, I need to
     transform each element of the dataset into a tensor.
@@ -467,12 +456,8 @@ My model is defined as follows:
     underlying structure. It may be worrying, but, in reality, I didn't
     take any explicit measure to reduce overfitting.
 
-    <figure id="fig:lossplot">
-    <span class="image placeholder" data-original-image-src="Unknown-4.png"
-    data-original-image-title="" width="75%"></span>
-    <figcaption>Plot showing the loss evolution between training set and
-    evauation set</figcaption>
-    </figure>
+    ![Plot showing the loss evolution between training set and evauation
+    set](images/images/Unknown-4.png){#fig:lossplot width="75%"}
 
 5.  I improve my model with the following:
 
@@ -540,15 +525,10 @@ My model is defined as follows:
         Figure [5](#fig:transf){reference-type="ref"
         reference="fig:transf"} for a better understanding):
 
-        <figure id="fig:transf">
-        <span class="image placeholder"
-        data-original-image-src="transformations.png"
-        data-original-image-title="" width="75%"></span>
-        <figcaption>Different transformation applied to perform data
-        augmentation. Examples taken from <a
-        href="https://pytorch.org/vision/main/auto_examples/transforms/plot_transforms_illustrations.html#sphx-glr-auto-examples-transforms-plot-transforms-illustrations-py">pytorch
-        documentation</a></figcaption>
-        </figure>
+        ![Different transformation applied to perform data augmentation.
+        Examples taken from [pytorch
+        documentation](https://pytorch.org/vision/main/auto_examples/transforms/plot_transforms_illustrations.html#sphx-glr-auto-examples-transforms-plot-transforms-illustrations-py)](images/images/transformations.png){#fig:transf
+        width="75%"}
 
         -   `RandomHorizontalFlip()`: This transformation randomly flips
             the input image horizontally with a 50% probability. Suppose
@@ -613,14 +593,10 @@ My model is defined as follows:
         number of epochs led to a certain amount of accuracy (in this
         case the image refers to using `batch_size=32`).
 
-        <figure id="fig:epoch">
-        <span class="image placeholder" data-original-image-src="epoch.png"
-        data-original-image-title="" width="75%"></span>
-        <figcaption>Evolution of evaluation and trainig loss, as well as
-        evolution of accuracy related to increase of epochs with batch size 32.
-        <em>Please note that the label "step" here refers to epochs.</em>
-        </figcaption>
-        </figure>
+        ![Evolution of evaluation and trainig loss, as well as evolution
+        of accuracy related to increase of epochs with batch size 32.
+        *Please note that the label \"step\" here refers to epochs.*
+        ](images/images/epoch.png){#fig:epoch width="75%"}
 
 6.  The Model parameters are saved in this line of code \[lines
     440-441\]:
